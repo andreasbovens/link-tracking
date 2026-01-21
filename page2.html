@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page 2</title>
+  </head>
+  <body>
+    <h1>This is Page 2</h1>
+
+    <a id="next-link" href="page3.html">Click here to go to Page 3</a>
+
+    <script>
+      // 1. Get the query string from the current URL (e.g., "?ref=experiment1")
+      const queryString = window.location.search;
+
+      // 2. Parse the parameters
+      const urlParams = new URLSearchParams(queryString);
+
+      // 3. Get the specific value of 'ref'
+      const refValue = urlParams.get("ref");
+
+      // 4. If a 'ref' exists, update the link to Page 3
+      if (refValue) {
+        const link = document.getElementById("next-link");
+
+        // This takes the current href ("page3.html") and adds the ref to it
+        link.href = link.getAttribute("href") + "?ref=" + refValue;
+      }
+    </script>
+  </body>
+</html>
