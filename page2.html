@@ -8,24 +8,43 @@
   <body>
     <h1>This is Page 2</h1>
 
-    <a id="next-link" href="page3.html">Click here to go to Page 3</a>
+    <p>All links below will inherit the reference:</p>
+
+    <ul>
+      <li><a href="page3.html">Go to Page 3</a></li>
+      <li><a href="page4.html">Go to Page 4</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
 
     <script>
-      // 1. Get the query string from the current URL (e.g., "?ref=experiment1")
+      // 1. Get the 'ref' value from the current URL
       const queryString = window.location.search;
-
-      // 2. Parse the parameters
       const urlParams = new URLSearchParams(queryString);
-
-      // 3. Get the specific value of 'ref'
       const refValue = urlParams.get("ref");
 
-      // 4. If a 'ref' exists, update the link to Page 3
+      // 2. Only run this if we actually found a 'ref'
       if (refValue) {
-        const link = document.getElementById("next-link");
+        // 3. Select ALL <a> tags on the page
+        const allLinks = document.querySelectorAll("a");
 
-        // This takes the current href ("page3.html") and adds the ref to it
-        link.href = link.getAttribute("href") + "?ref=" + refValue;
+        // 4. Loop through each link
+        allLinks.forEach((link) => {
+          // Get the current href of the link
+          let currentHref = link.getAttribute("href");
+
+          // Skip if the link has no href (e.g. anchor tags)
+          if (!currentHref) return;
+
+          // Check if the link already has a '?'
+          // If it does, we use '&' to add the new param. If not, we use '?'.
+          const separator = currentHref.includes("?") ? "&" : "?";
+
+          // Update the link
+          link.setAttribute(
+            "href",
+            currentHref + separator + "ref=" + refValue,
+          );
+        });
       }
     </script>
   </body>
