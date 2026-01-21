@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page 3</title>
+  </head>
+  <body>
+    <h1>Contact us</h1>
+
+    <h2 id="display-area">Waiting for data...</h2>
+
+    <script>
+      // 1. Get the query string
+      const queryString = window.location.search;
+
+      // 2. Parse the parameters
+      const urlParams = new URLSearchParams(queryString);
+
+      // 3. Get the value of 'ref'
+      const refValue = urlParams.get("ref");
+
+      // 4. Find the display element
+      const displayElement = document.getElementById("display-area");
+
+      // 5. Update the text based on the result
+      if (refValue) {
+        displayElement.textContent = "You came from: " + refValue;
+
+        // Optional: visual distinction based on the experiment
+        if (refValue === "experiment1") {
+          displayElement.style.color = "blue";
+        } else if (refValue === "experiment2") {
+          displayElement.style.color = "red";
+        }
+      } else {
+        displayElement.textContent = "No experiment reference found.";
+      }
+    </script>
+  </body>
+</html>
